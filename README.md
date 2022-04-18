@@ -1,18 +1,16 @@
-# Apache
+# Learn Shopify App
 
-Using php with apache.
+Shopifyアプリを学ぶ目的で作成したリポジトリです。ぼちぼち更新中
 
 ## Usage
 
-1. data内にコンテンツを配置する
-
-2. .envファイルをコピーする
+1.envファイルをコピーする
 ```
 コピー先で設定は自由に変えて頂いて構いません。
 $ cp .env-sample .env
 ```
 
-3. dockerを起動する
+2. dockerを起動する
 ```
 起動
 $ docker-compose up -d
@@ -22,13 +20,11 @@ $ docker-compose up -d
 $ docker-compose down
 ```
 
+3. localhostにアクセスして、センターの「アプリ開発を始める」から読み進めてください！
+
+![](./docs/images/img-01.png)
+
 ## Settings
-
-### ・Portを変更する
-1. [docker-compose.yml](./docker-compose.yml)を開く
-2. 変更したいコンテナのportsを書き換える
-3. （docker動作中なら）コンテナを再起動する
-
 ### ・PHP My Adminのインポートサイズを変更する
 1. [upload.ini](./docker/phpmyadmin/upload.ini)を開く
 2. 設定値を変更する
