@@ -1,0 +1,10 @@
+# server file
+*.swp
+*.log
+
+# docker
+docker/mysql
+docker/phpmyadmin/sessions
+
+# keep
+!.gitkeep

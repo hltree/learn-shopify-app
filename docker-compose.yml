@@ -1,0 +1,62 @@
+version: '3'
+
+services:
+  php:
+    container_name: ${CONTAINER_NAME_PREFIX:-}php
+    image: php:7.4-apache
+    build: ./docker/php
+    volumes:
+      - ./docker/php/php.ini:/usr/local/etc/php/php.ini
+      - ./docker/php/000-default.conf:/etc/apache2/sites-available/000-default.conf
+      - ./data:/var/www/html
+    ports:
+      - ${PHP_WEB_PORT:-80:80}
+    networks:
+      - app
+  mysql:
+    container_name: ${CONTAINER_NAME_PREFIX:-}mysql
+    image: mysql:5.7
+    ports:
+      - ${DB_PORT:-3306:3306}
+    restart: always
+    volumes:
+      - ./docker/mysql/data:/var/lib/mysql
+      - ./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./docker/mysql/sql:/docker-entrypoint-initdb.d
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD:-password}
+      - MYSQL_DATABASE=${DB_NAME:-database}
+      - MYSQL_USER=${DB_USER:-user}
+      - MYSQL_PASSWORD=${DB_PASSWORD:-password}
+      - TZ='Asia/Tokyo'
+    networks:
+      - app
+  phpmyadmin:
+    container_name: ${CONTAINER_NAME_PREFIX:-}phpmyadmin
+    image: phpmyadmin/phpmyadmin
+    environment:
+      - PMA_ARBITARY=1
+      - PMA_HOST=${CONTAINER_NAME_PREFIX:-}mysql
+      - PMA_USER=${DB_USER:-user}
+      - PMA_PASSWORD=${DB_PASSWORD:-password}
+    ports:
+      - ${PMA_PORT:-8080:80}
+    volumes:
+      - ./docker/phpmyadmin/upload.ini:/usr/local/etc/php/conf.d/phpmyadmin-misc.ini
+      - ./docker/phpmyadmin/sessions:/sessions
+    networks:
+      - app
+  ngrok:
+    container_name: ${CONTAINER_NAME_PREFIX:-}ngrok
+    image: wernight/ngrok:latest
+    ports:
+      - ${NGROK_PORT:-4040}:4040
+    environment:
+      - NGROK_AUTH=${NGROK_AUTH:-27m02PDatn2fLXwW0vmQvSdzL8m_6r1XEavqunxdcGDR9dLUt}
+      - NGROK_PORT=${CONTAINER_NAME_PREFIX:-}php
+      - NGROK_HEADER=localhost:${PHP_WEB_PORT:-80}
+    networks:
+      - app
+networks:
+  app:
