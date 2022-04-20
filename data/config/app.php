@@ -235,5 +235,94 @@ return [
     'shopUrl' => env('SHOP_URL', 'your-store-url'),
     'apiKey' => env('SHOP_API_KEY', 'your-app-api-key'),
     'secretKey' => env('SHOP_SECRET_KEY', 'your-app-secret-key'),
-    'scopes' => env('SHOP_API_ALLOW_SCOPE', 'read_products,write_products,read_script_tags,write_script_tags,read_content,write_content'),
+
+    /**
+     * read_content, write_content
+     * ブログ、ページ、コメント、リダイレクトデータを読み書きできる権限
+     *
+     * read_themes, write_themes
+     * テーマデータを読み書きできる権限
+     *
+     * read_products, write_products
+     * 商品データ（商品、バリアント、イメージ、コレクション）を読み書きできる権限
+     *
+     * read_product_listings
+     * 商品リスト、コレクションリストを読むことができる権限
+     *
+     * read_customers, write_customers
+     * 顧客データ（顧客検索項目データ）の読み書きできる権限
+     *
+     * read_orders, write_orders
+     * オーダーデータの読み書き権限
+     *
+     * read_all_orders
+     * 60日より前のデータ（全オーダーデータ）を読むことができる権限。この権限を必要とする場合は取得する必要性とともに別途申請する必要があります。
+     *
+     * read_draft_orders, write_draft_orders
+     * ドラフトオーダーデータの読み書きできる権限
+     *
+     * read_inventory, write_inventory
+     * 在庫データの読み書きできる権限
+     *
+     * read_locations
+     * ロケーションデータを読むことができる権限
+     *
+     * read_script_tags, write_script_tags
+     * スクリプトタグデータの読み書きできる権限
+     *
+     * read_fulfillments, write_fulfillments
+     * フルフィルメントデータの読みことができる権限
+     *
+     * read_assigned_fulfillment_orders, write_assigned_fulfillment_orders
+     * 自身のフルフィルメントオーダーデータの読み書きできる権限
+     *
+     * read_merchant_managed_fulfillment_orders, write_merchant_managed_fulfillment_orders
+     * マーチャント管理フルフィルメントオーダーデータの読み書きできる権限
+     *
+     * read_third_party_fulfillment_orders, write_third_party_fulfillment_orders
+     * サードパーティーフルフィルメントオーダーデータの読み書きできる権限
+     *
+     * read_shipping, write_shipping
+     * 配送会社、国、地域の読み書きできる権限
+     *
+     * read_analytics
+     * 分析データを読むことができる権限
+     *
+     * read_users, write_users
+     * Shopifyユーザーデータの読み書きできる権限
+     *
+     * read_checkouts, write_checkouts
+     * チェックアウトデータの読み書きできる権限
+     *
+     * read_reports, write_reports
+     * レポートデータの読み書きできる権限
+     *
+     * read_price_rules, write_price_rules
+     * プライスルールデータの読み書きできる権限
+     *
+     * read_discounts, write_discounts
+     * ディスカウントデータの読み書きできる権限（GraphQLに限定のようです、後で確認します。）
+     *
+     * read_marketing_events, write_marketing_events
+     * マーケティングイベントデータの読み書きできる権限
+     *
+     * read_resource_feedbacks, write_resource_feedbacks
+     * アプリに関するリソースを通知するデータの読み書きできる権限
+     *
+     * read_shopify_payments_payouts
+     * Shopify Payments の支払い、バランス、トランザクションデータを読むことができる権限
+     *
+     * read_shopify_payments_disputes
+     * Shopify PaymentAccessへのクレームデータを読むことができる権限
+     *
+     * read_translations, write_translations
+     * 翻訳データの読み書き権限
+     *
+     * read_locales, write_locales
+     * ショップの地域言語設定データの読み書きできる権限
+     *
+     * 参考
+     * https://qiita.com/syantien/items/7fe9afca71596694f598
+     */
+    'scopes' => env('SHOP_API_ALLOW_SCOPE', 'read_content,write_content'),
 ];
