@@ -23,4 +23,12 @@ class Options extends Model
 
         return $accessToken;
     }
+
+    public static function reset()
+    {
+        $records = self::whereNotNull('access_token');
+        if ($records->exists()) {
+            $records->update(['access_token' => '']);
+        }
+    }
 }

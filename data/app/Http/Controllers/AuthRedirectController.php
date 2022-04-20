@@ -27,19 +27,21 @@ class AuthRedirectController extends Controller
             }
         }
 
-        if (Options::select('*')->whereNotNull('access_token')->doesntExist()) {
-            DB::beginTransaction();
-            try {
-                if (!isset($accessToken)) throw new \Exception('トークンを取得できませんでした');
-                Options::create([
-                    'access_token' => $accessToken
-                ]);
-                DB::commit();
-            } catch (\Exception $Exception) {
-                DB::rollBack();
-                echo $Exception->getMessage();
-                die();
-            }
+        /**
+         * アプリの再インストール等に対応するため、アクセストークンは再登録させるようにする
+         */
+        Options::reset();
+        DB::beginTransaction();
+        try {
+            if (!isset($accessToken)) throw new \Exception('トークンを取得できませんでした');
+            Options::create([
+                'access_token' => $accessToken
+            ]);
+            DB::commit();
+        } catch (\Exception $Exception) {
+            DB::rollBack();
+            echo $Exception->getMessage();
+            die();
         }
 
         $config = ShopifySDK::$config;
