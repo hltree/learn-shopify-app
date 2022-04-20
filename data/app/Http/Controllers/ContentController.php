@@ -196,16 +196,43 @@ HTML
                 ],
                 [
                     'title' => 'アプリのレイアウトを変更する',
-                    'content' => <<<HTML
+                    'content' => '
 試しに適当なページを編集して、Shopify側に表示されているアプリページをリロードしてみてください。<br>
 変更が反映されているはずです！<br><br>
-これは単にngrokで生成したページを表示しているだけなので、デプロイするときはアプリ用ページを用意してShopifyに認証させるだけで良さそうですね！
-HTML
-                ],
+これは単にngrokで生成したページを表示しているだけなので、デプロイするときはアプリ用ページを用意してShopifyに認証させるだけで良さそうですね！<br>
+<a href="' . route('content.page', ['pageName' => 'step2']) . '">次のステップ</a>では、アプリからストアを実際にカスタマイズする方法をご紹介します。
+'
+                ]
+            ]
+        ]);
+    }
+
+    protected function step2(): void
+    {
+        $this->viewParams = array_merge($this->viewParams, [
+            'title' => 'アプリ開発を始める',
+            'lead' => '
+<p><a href="' . route('content.page', ['pageName' => 'step1']) . '">ステップ1</a>ではアプリの作成とストアへのインストールを行いました。<br>
+次はこのアプリを使って、実際にストアをカスタマイズしてみます。</p>
+'
+            ,
+            'sections' => [
                 [
                     'title' => 'アプリからページを新規作成する',
-                    'content' => <<<HTML
-HTML
+                    'content' => 'このステップではShopifyに新規ページを作成してみます。（ページとは、WordPressで例えると固定ページのことです！）<br>
+まずは<a href="' . route('page.create') . '">こちら</a>にアクセスしましょう。<br><br>
+<img src="/storage/images/step1-img9.png" alt="" /><br><br>
+このようなフォームが表示されるはずです。<br>
+適当にページタイトルとコンテンツを入力して送信してみましょう。<br><br>
+<img src="/storage/images/step1-img10.png" alt="" /><br><br>
+すると、このようなページに移動するはずです<br><br>
+<img src="/storage/images/step1-img11.png" alt="" /><br><br>
+こちら のリンクをクリックしましょう。送信したフォーム通りの内容でページが作成されているはずです
+'
+                ],
+                [
+                    'title' => '',
+                    'content' => ''
                 ]
             ]
         ]);
