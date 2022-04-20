@@ -15,7 +15,7 @@ class Options extends Model
     {
         $accessToken = '';
 
-        $where = $this::whereNotNull('access_token');
+        $where = $this::whereNotNull('access_token')->where('access_token', '!=', '');
         if ($where->exists()) {
             $takeOne = $where->get()->take(1)[0];
             $accessToken = $takeOne->getAttribute('access_token');
@@ -26,7 +26,7 @@ class Options extends Model
 
     public static function reset()
     {
-        $records = self::whereNotNull('access_token');
+        $records = self::whereNotNull('access_token')->where('access_token', '!=', '');
         if ($records->exists()) {
             $records->update(['access_token' => '']);
         }
