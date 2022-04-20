@@ -25,4 +25,5 @@ Route::group(['prefix' => 'page', 'as' => 'page.'], function () {
     Route::post('new', 'App\Http\Controllers\PageController@new')->name('new');
     Route::get('list', 'App\Http\Controllers\PageController@list')->name('list');
     Route::get('{pageId}/edit', 'App\Http\Controllers\PageController@edit')->name('edit');
+    Route::put('{pageId}', 'App\Http\Controllers\PageController@update')->name('update');
 });

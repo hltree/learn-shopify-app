@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\CreatedPageLog;
+use App\Models\EditedPageLog;
 use App\Models\Option;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -83,14 +84,63 @@ class PageController extends Controller
             'AccessToken' => $accessToken
         ]);
 
+        $pageLog = $PageLogs->get()->take(1)[0]->toArray();
+
         /**
          * @returns array
         */
         $pageArray = $Shopify->Page($castPageId)->get();
+        $fetchPageArray = array_merge($pageLog, $pageArray);
+
+        $editLogs = [];
+        $EditedPageLogs = EditedPageLog::where('page_id', $castPageId);
+        if ($EditedPageLogs->exists()) {
+            $editLogs = $EditedPageLogs->orderBy('updated_at', 'desc')->get();
+        }
 
         return view('page.edit', [
-            'page' => $pageArray
+            'page' => $fetchPageArray,
+            'pageId' => $pageId,
+            'editLogs' => $editLogs
         ]);
+    }
+
+    public function update(Request $request, string $pageId)
+    {
+        $this->validator($request->all())->validate();
+
+        $castPageId = (int)$pageId;
+
+        $PageLogs = CreatedPageLog::where('page_id', $castPageId);
+        if ($PageLogs->doesntExist()) die('ページIDが不正です');
+
+        $Option = new Option();
+        $accessToken = $Option->getAccessToken();
+
+        if (!$accessToken) {
+            die('アクセストークンがありません');
+        }
+        $Shopify = new ShopifySDK([
+            'ShopUrl' => config('app.shopUrl'),
+            'AccessToken' => $accessToken
+        ]);
+
+
+        $Shopify->Page($castPageId)->put([
+            'title' => $request->get('title'),
+            'body_html' => $request->get('content')
+        ]);
+
+        /**
+         * @returns array
+         */
+        $fetchPageArray = $Shopify->Page($castPageId)->get();
+        $fetchPageArray['page_id'] = $fetchPageArray['id'];
+        unset($fetchPageArray['created_at'], $fetchPageArray['updated_at'], $fetchPageArray['id']);
+
+        EditedPageLog::create($fetchPageArray);
+
+        return redirect(route('page.edit', ['pageId' => $pageId]))->with('successUpdate', 'アップデートに成功しました！');
     }
 
     protected function validator(array $data): \Illuminate\Validation\Validator

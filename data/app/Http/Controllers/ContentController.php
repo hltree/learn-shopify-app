@@ -210,7 +210,7 @@ HTML
     protected function step2(): void
     {
         $this->viewParams = array_merge($this->viewParams, [
-            'title' => 'アプリ開発を始める',
+            'title' => 'アプリからページを操作する',
             'lead' => '
 <p><a href="' . route('content.page', ['pageName' => 'step1']) . '">ステップ1</a>ではアプリの作成とストアへのインストールを行いました。<br>
 次はこのアプリを使って、実際にストアをカスタマイズしてみます。</p>
@@ -236,6 +236,22 @@ HTML
                     先ほど作成したページを編集してみましょう。<br>
                     作成したページの<a href="' . route('page.list') . '">一覧ページ</a>にアクセスしてください。<br>
                     <img src="/storage/images/step2-img1.png" alt="" /><br><br>
+                    <b>このアプリから投稿したページの一覧</b>が表示されると思いますので、先ほど投稿したページ横のeditボタンを押しましょう。<br>
+                    新規投稿したときと同じフォームが表示されると思います。ここのタイトルを変更して、送信してみましょう。例ではタイトルを「がギグ」と入力してみます。<br><br>
+                    <img src="/storage/images/step2-img2.png" alt="" /><br><br>
+                    送信します。<br>
+                    正常に処理されるとこのようになります。<br><br>
+                    <img src="/storage/images/step2-img3.png" alt="" /><br><br>
+                    ストアのページにも変更の反映を確認できます。<br><br>
+                    <img src="/storage/images/step2-img4.png" alt="" /><br><br>
+                    '
+                ],
+                [
+                    'title' => 'アプリから作成したページを削除する',
+                    'content' => '
+                    先ほど編集したページを削除してみましょう！<br>
+                    技術的には先に行ったステップと変わりありませんので、機能は作成していません。<br><br>
+                    ご興味があれば実装してみてください！
                     '
                 ]
             ]
