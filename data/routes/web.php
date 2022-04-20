@@ -23,4 +23,6 @@ Route::get('authRedirect', 'App\Http\Controllers\AuthRedirectController@index');
 Route::group(['prefix' => 'page', 'as' => 'page.'], function () {
     Route::get('create', 'App\Http\Controllers\PageController@create')->name('create');
     Route::post('new', 'App\Http\Controllers\PageController@new')->name('new');
+    Route::get('list', 'App\Http\Controllers\PageController@list')->name('list');
+    Route::get('{pageId}/edit', 'App\Http\Controllers\PageController@edit')->name('edit');
 });

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CreatedPageLogs;
-use App\Models\Options;
+use App\Models\CreatedPageLog;
+use App\Models\Option;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use PHPShopify\ShopifySDK;
@@ -19,8 +19,8 @@ class PageController extends Controller
     {
         $this->validator($request->all())->validate();
 
-        $Options = new Options();
-        $accessToken = $Options->getAccessToken();
+        $Option = new Option();
+        $accessToken = $Option->getAccessToken();
 
         if (!$accessToken) {
             die('アクセストークンがありません');
@@ -38,7 +38,7 @@ class PageController extends Controller
 
         $pageArray = $Shopify->Page->post($pageInfo);
         if (is_array($pageArray)) {
-            CreatedPageLogs::create([
+            CreatedPageLog::create([
                 'title' => $pageArray['title'],
                 'page_id' => $pageArray['id'],
                 'shop_id' => $pageArray['shop_id'],
@@ -53,6 +53,43 @@ class PageController extends Controller
 
         return view('page.created', [
             'pageUrl' => 'https://' . config('app.shopUrl') . '/admin/pages/' . $pageArray['id']
+        ]);
+    }
+
+    public function list()
+    {
+        $pages = CreatedPageLog::all();
+
+        return view('page.list', [
+            'pages' => $pages
+        ]);
+    }
+
+    public function edit(string $pageId = '')
+    {
+        $castPageId = (int)$pageId;
+
+        $PageLogs = CreatedPageLog::where('page_id', $castPageId);
+        if ($PageLogs->doesntExist()) die('ページIDが不正です');
+
+        $Option = new Option();
+        $accessToken = $Option->getAccessToken();
+
+        if (!$accessToken) {
+            die('アクセストークンがありません');
+        }
+        $Shopify = new ShopifySDK([
+            'ShopUrl' => config('app.shopUrl'),
+            'AccessToken' => $accessToken
+        ]);
+
+        /**
+         * @returns array
+        */
+        $pageArray = $Shopify->Page($castPageId)->get();
+
+        return view('page.edit', [
+            'page' => $pageArray
         ]);
     }
 

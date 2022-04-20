@@ -1,4 +1,5 @@
 @include('header')
+<h2>新規ページ</h2>
 <form method="POST" action="{{ route('page.new') }}">
     @csrf
 

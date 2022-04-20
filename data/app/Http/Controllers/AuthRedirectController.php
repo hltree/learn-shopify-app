@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Options;
+use App\Models\Option;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
@@ -30,11 +30,11 @@ class AuthRedirectController extends Controller
         /**
          * アプリの再インストール等に対応するため、アクセストークンは再登録させるようにする
          */
-        Options::reset();
+        Option::reset();
         DB::beginTransaction();
         try {
             if (!isset($accessToken)) throw new \Exception('トークンを取得できませんでした');
-            Options::create([
+            Option::create([
                 'access_token' => $accessToken
             ]);
             DB::commit();

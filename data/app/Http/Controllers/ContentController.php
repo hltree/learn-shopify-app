@@ -231,8 +231,12 @@ HTML
 '
                 ],
                 [
-                    'title' => '',
-                    'content' => ''
+                    'title' => 'アプリから作成したページを編集する',
+                    'content' => '
+                    先ほど作成したページを編集してみましょう。<br>
+                    作成したページの<a href="' . route('page.list') . '">一覧ページ</a>にアクセスしてください。<br>
+                    <img src="/storage/images/step2-img1.png" alt="" /><br><br>
+                    '
                 ]
             ]
         ]);
