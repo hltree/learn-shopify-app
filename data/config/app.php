@@ -235,5 +235,5 @@ return [
     'shopUrl' => env('SHOP_URL', 'your-store-url'),
     'apiKey' => env('SHOP_API_KEY', 'your-app-api-key'),
     'secretKey' => env('SHOP_SECRET_KEY', 'your-app-secret-key'),
-    'scopes' => env('SHOP_API_ALLOW_SCOPE', 'read_products,write_products,read_script_tags,write_script_tags'),
+    'scopes' => env('SHOP_API_ALLOW_SCOPE', 'read_products,write_products,read_script_tags,write_script_tags,read_content,write_content'),
 ];
