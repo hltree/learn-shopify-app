@@ -398,6 +398,8 @@
             font-family: 'Nunito', sans-serif;
         }
     </style>
+    <link href="/storage/css/dark.css" rel="stylesheet" />
+    <script src="/storage/js/sweetalert2.min.js"></script>
 </head>
 <body class="antialiased">
 <div

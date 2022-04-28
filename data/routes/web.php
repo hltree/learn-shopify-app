@@ -27,3 +27,8 @@ Route::group(['prefix' => 'page', 'as' => 'page.'], function () {
     Route::get('{pageId}/edit', 'App\Http\Controllers\PageController@edit')->name('edit');
     Route::put('{pageId}', 'App\Http\Controllers\PageController@update')->name('update');
 });
+
+Route::group(['prefix' => 'csv', 'as' => 'csv.'], function () {
+    Route::get('/', 'App\Http\Controllers\CsvController@index')->name('index');
+    Route::post('/', 'App\Http\Controllers\CsvController@export')->name('export');
+});

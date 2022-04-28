@@ -257,4 +257,59 @@ HTML
             ]
         ]);
     }
+
+    protected function step3(): void
+    {
+        $this->viewParams = array_merge($this->viewParams, [
+            'title' => '注文をCSVに出力する',
+            'lead' => '
+<p><a href="' . route('content.page', ['pageName' => 'step2']) . '">ステップ2</a>ではアプリの作成とストアへのインストールを行いました。<br>
+次はこのアプリを使って、注文を指定形式のCSVに出力してみましょう。サンプルとして、注文データを<a href="https://business.kuronekoyamato.co.jp/service/lineup/b2/index.html">ヤマト運輸 B2クラウド</a>に取り込むCSVに変換してみます。（完全なデータではないので、あくまでも参考程度にしてください）</p>
+'
+            ,
+            'sections' => [
+                [
+                    'title' => '注文を作成する',
+                    'content' => '
+出力できる注文がないといけませんので、まずは注文を作成します。（既に複数の注文のある方はこの作業はスキップしても構いません）<br>
+ストア管理画面のトップへ移動して、左サイドナビの「Orders」をクリックします。<br><br>
+<img src="/storage/images/step3-img1.png" alt="" /><br><br>
+中央の緑ボタン「Create order」をクリックしましょう。<br>
+このような画面になるはずです<br><br>
+<img src="/storage/images/step3-img2.png" alt="" /><br><br>
+画面右側のCustomerカードの中にある「Search or create a customer」にフォーカスしてください。<br>
+注文対象となる顧客のいる場合はその顧客を選択してください。いない場合は作成します。今回はいない場合で進行します<br>
+「Create a new customer」をクリックします。<br><br>
+<img src="/storage/images/step3-img3.png" alt="" /><br><br>
+適当に入力して、保存します。<br>
+今登録した顧客を選択した状態で「Add custom item」をクリックします。<br><br>
+<img src="/storage/images/step3-img4.png" alt="" /><br><br>
+適当に入力して、Doneします。<br><br>
+<img src="/storage/images/step3-img5.png" alt="" /><br><br>
+下部の「Collect payment」から「Mark as paid」（支払い済）をクリックします。<br><br>
+<img src="/storage/images/step3-img6.png" alt="" /><br><br>
+オーダーを作成するか確認画面のモーダルが出ると思うので、「Create Order」をクリックします。<br><br>
+<img src="/storage/images/step3-img7.png" alt="" /><br><br>
+注文として登録されました。注文には<a href="https://help.shopify.com/ja/manual/orders/order-status#part-2d2febdb0d61860a">さまざまなステータス</a>がありますので、同じ手順で複数パターン登録しておくとよいでしょう。
+'
+                ],
+                [
+                    'title' => '注文をCSVで出力する',
+                    'content' => '
+                    <a href="' . route('csv.index') .'">CSV出力のルート</a>に移動します。<br>
+                    このようなフォームが出力されているはずです。<br><br>
+                    <img src="/storage/images/step3-img8.png" alt="" /><br><br>
+                    先に登録したデータは Unfulfilled（未発送）かつ未アーカイブでした。フォームにはこの条件で送信してみます。<br><br>
+                    <img src="/storage/images/step3-img9.png" alt="" /><br><br>
+                    正常に処理を完了するとCSVをダウンロードできます。今回はダウンロードしたCSVをNumbers（Appleのアプリ）で開いてみます。<br><br>
+                    <img src="/storage/images/step3-img10.png" alt="" /><br><br>
+                    注文に合ったデータで出力されていますね！<br>
+                    配達日等の出力条件を整えないといけなかったり、郵便番号が数字と認識されて 0 になっていたり、文字コードを調整する必要があったりと調整事項はかなりありますが、
+                    とりあえず出力できたのでOKとします。<br>
+                    上記の調整を施したり、出力形式を変更してみたりなどぜひカスタマイズに挑戦してみてください！
+                    '
+                ]
+            ]
+        ]);
+    }
 }

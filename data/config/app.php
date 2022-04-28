@@ -324,5 +324,5 @@ return [
      * 参考
      * https://qiita.com/syantien/items/7fe9afca71596694f598
      */
-    'scopes' => env('SHOP_API_ALLOW_SCOPE', 'read_content,write_content'),
+    'scopes' => env('SHOP_API_ALLOW_SCOPE', 'read_content,write_content,read_orders'),
 ];

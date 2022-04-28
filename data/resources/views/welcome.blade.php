@@ -24,6 +24,31 @@
                 </div>
             </div>
         </a>
+        <a class="p-6 border-t border-gray-200 dark:border-gray-700" href="{{ route('content.page', ['pageName' => 'step3']) }}">
+            <div class="flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ai ai-File"><path d="M4 4v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8.342a2 2 0 0 0-.602-1.43l-4.44-4.342A2 2 0 0 0 13.56 2H6a2 2 0 0 0-2 2z"/><path d="M9 13h6"/><path d="M9 17h3"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg>
+                <div class="ml-4 text-lg leading-7 font-semibold"><div class="underline text-gray-900 dark:text-white">Step3. 注文をCSVに出力する</div></div>
+            </div>
+
+            <div class="ml-12">
+                <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
+                    注文をCSVに出力する機能はデフォルトの機能で存在しますが、今回は指定フォーマットで出力することにチャレンジします！
+                </div>
+            </div>
+        </a>
+
+{{--        <a class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-l" href="{{ route('content.page', ['pageName' => 'step4']) }}">--}}
+{{--            <div class="flex items-center">--}}
+{{--                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ai ai-Envelope"><path d="M2 6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6z"/><path d="M2 8l7.501 6.001a4 4 0 0 0 4.998 0L22 8"/></svg>--}}
+{{--                <div class="ml-4 text-lg leading-7 font-semibold text-gray-900 dark:text-white">Step4. 特定のカスタマーにメールを送信する</div>--}}
+{{--            </div>--}}
+
+{{--            <div class="ml-12">--}}
+{{--                <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">--}}
+{{--                    商品を注文履歴から検索し、マッチした注文のカスタマーにメールを送信します！--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </a>--}}
     </div>
 </div>
 
